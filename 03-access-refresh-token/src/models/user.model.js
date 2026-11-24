@@ -1,0 +1,25 @@
+import mongoose from "mongoose";
+
+const userSchema = new mongoose.Schema({
+    name:{
+        type:String,
+        required:true,
+        minLength:3,
+        maxLength:30
+    },
+    email:{
+      type:String,
+      required:true,
+      unique:true,
+      match:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+
+    },
+    passwordHash:{
+        type:String,
+        required:true,
+
+    },
+    refreshToken:{
+        type:String
+    }
+})
