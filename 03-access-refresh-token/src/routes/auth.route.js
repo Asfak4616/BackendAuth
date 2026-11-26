@@ -30,9 +30,27 @@ router.post("/register", async (req, res) => {
 
   const { accessToken, refreshToken } = generateTokens({ userId: user._id });
 
+user.refreshToken = refreshToken
+await user.save()
+
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
   });
+
+  res.status(201).json({
+    message:"User register Successfully",
+    data:{
+      user:{
+        name:user.name,
+        email:user.email
+      }
+    },
+    accessToken
+
+  })
 });
+
+
+router.get("/me",)
 
 export default router;
